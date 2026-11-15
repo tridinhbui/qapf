@@ -3,12 +3,16 @@
 
 export const profile = {
   name: 'Anh Pham',
+  fullName: 'Quynh Anh Pham',
+  photo: 'anh.png',
+  headline: 'Finance Junior at UIC · FS Assurance Intern at EY · Corporate Finance & FP&A',
+  seeking: 'Seeking Summer 2027 roles',
   email: 'qpham10@uic.edu',
   phone: '224-265-3265',
-  linkedin: 'https://www.linkedin.com/', // TODO: replace with profile URL
+  linkedin: 'https://www.linkedin.com/in/quynh-anh-pham-219b5a387/',
   location: 'Chicago, IL',
-  kicker: 'Finance · University of Illinois Chicago · Class of 2028',
-  lead: "I'm Anh Pham, a finance student with hands-on experience across audit, FP&A, treasury, and real estate private equity. I build models, reconcile the details, and write reports people can act on.",
+  kicker: 'Finance · University of Illinois Chicago · Beta Gamma Sigma',
+  lead: "I'm Quynh Anh (Anh) Pham, a finance junior with experience across financial services, fintech, treasury, real estate private equity and equity research. I build models, reconcile the details, and write reports people can act on.",
 }
 
 export const stats = [
@@ -19,8 +23,9 @@ export const stats = [
 ]
 
 export const about = [
-  'I’m pursuing a B.S. in Finance at the University of Illinois Chicago. My experience spans a Big Four audit internship at EY, financial analysis at a fintech startup, treasury operations at BIDV Bank, and real estate private equity underwriting through Project Destined.',
-  'What ties it together: I enjoy turning raw financial data into models and reports that help teams decide, whether that means reconciling accounts, forecasting liquidity, or stress-testing the assumptions behind an acquisition.',
+  'I’m a Finance junior at the University of Illinois Chicago and a member of Beta Gamma Sigma. My experience spans financial services assurance at EY, financial analysis at FinBud AI, treasury at BIDV Bank, real estate underwriting with Project Destined, and public equity research.',
+  'Along the way I’ve built skills in financial modeling, forecasting, variance analysis, valuation, liquidity planning, reconciliation and management reporting.',
+  'I’m most interested in the intersection of finance, strategy and data, and I’m exploring Summer 2027 opportunities in corporate finance, FP&A, financial analysis, finance strategy and investments.',
 ]
 
 export const education = {
@@ -33,17 +38,18 @@ export const education = {
 
 export const experience = [
   {
-    when: '2026 · JUN–AUG', sub: 'Big Four', company: 'Ernst & Young (EY)', role: 'Financial Services Audit Intern',
+    when: '2026 · JUN–AUG', sub: 'Big Four', company: 'Ernst & Young (EY)', role: 'FS Assurance Intern',
     bullets: [
       'Analyzed monthly movements across balance sheet and P&L accounts, flagging cost trends and unusual variances to help the engagement team assess reporting risk and target audit testing.',
       'Reconciled **8–10 trial balance accounts** against supporting schedules and statement line items, tracing and resolving discrepancies for accurate month-end reporting.',
-      'Validated **40+ invoices, bank statements and source documents** against reported balances, organizing evidence into audit workpapers.',
+      'Reviewed **40+ invoices, bank statements and source documents** against reported balances, flagging data inconsistencies before senior review.',
+      'Prepared client workpapers and summarized findings for engagement teams, supporting risk assessment and timely follow-up.',
     ],
   },
   {
-    when: '2026 · JAN–APR', sub: 'Washington, D.C.', company: 'Project Destined', role: 'Private Equity Intern, Real Estate',
+    when: '2026 · JAN–APR', sub: 'Washington, D.C. · Remote', company: 'Project Destined', role: 'Private Equity Intern, Real Estate',
     bullets: [
-      'Built an acquisition pro forma for a **100+ unit multifamily property**, modeling P&L, cash flow, IRR and equity multiple across scenarios.',
+      'Built an acquisition pro forma for a **100+ unit multifamily property**, modeling revenue, operating expenses, cash flow, IRR and equity multiple across scenarios.',
       'Analyzed rent comps and tested occupancy, rent growth, cap rate and exit assumptions, supporting an underwriting recommendation targeting a **mid-teens IRR**.',
     ],
   },
@@ -51,12 +57,12 @@ export const experience = [
     when: '2025 · AUG–DEC', sub: 'Chicago, IL', company: 'FinBud AI', role: 'Financial Analyst Intern',
     bullets: [
       'Built Excel models across **9+ revenue streams** to test pricing and cost scenarios and quantify how key assumptions move projected margins.',
-      'Improved monthly reporting efficiency by **25%** by summarizing cost variances, margin trends and risks in management reports.',
+      'Analyzed actuals against budgets and prior forecasts, identifying recurring revenue and cost variance drivers and improving reporting efficiency by **25%**.',
       'Saved **20+ hours per reporting cycle** by automating management reports, validating inputs and reconciling data across sources.',
     ],
   },
   {
-    when: '2025 · JUN–AUG', sub: 'Banking', company: 'BIDV Bank', role: 'Treasury Summer Analyst',
+    when: '2025 · JUN–AUG', sub: 'Ho Chi Minh City, Vietnam', company: 'BIDV Bank (Vietnam)', role: 'Treasury Summer Analyst',
     bullets: [
       'Forecasted weekly cash positions from **100+ treasury transactions**, giving visibility into short-term liquidity across currencies and accounts.',
       'Resolved **15+ payment discrepancies** with banking partners and internal teams, strengthening reconciliation accuracy and treasury reporting.',
@@ -65,6 +71,10 @@ export const experience = [
 ]
 
 export const leadership = [
+  {
+    when: '2026 – PRESENT', sub: 'Chicago, IL', company: 'Beta Gamma Sigma', role: 'Member',
+    bullets: ['Inducted into the international business honor society, recognizing the top tier of business students at AACSB-accredited schools.'],
+  },
   {
     when: '2024 – 2025', sub: 'Chicago, IL', company: 'Portfolio Management Team', role: 'Financial Sector Analyst',
     bullets: [

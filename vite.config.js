@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// base matches the GitHub Pages path: https://tridinhbui.github.io/qapf/
+// GitHub Pages serves under /qapf/; Vercel and local dev serve at /
 export default defineConfig({
   plugins: [react()],
-  base: '/qapf/',
+  base: process.env.GITHUB_ACTIONS ? '/qapf/' : '/',
 })

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import Chat from './Chat.jsx'
 import { profile, stats, about, education, experience, leadership, skills } from './data.js'
 
 const NAV = [['about', 'About'], ['experience', 'Experience'], ['leadership', 'Leadership'], ['skills', 'Skills'], ['contact', 'Contact']]
@@ -71,16 +72,81 @@ function Nav() {
   </>
 }
 
+function SplitTitle() {
+  const [ref, inView] = useInView()
+  const words = [['Turning'], ['numbers'], ['into'], ['decisions.', true]]
+  return <h1 ref={ref} className={`split ${inView ? 'in' : ''}`}>
+    {words.map(([w, em], i) => <span className="w" key={i}>
+      <span style={{ transitionDelay: `${0.15 + i * 0.12}s` }}>{em ? <em>{w}</em> : w}</span>{' '}
+    </span>)}
+  </h1>
+}
+
+function HeroChart() {
+  return <svg className="hero-chart" viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true">
+    <defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="var(--gold)" stopOpacity=".18" /><stop offset="1" stopColor="var(--gold)" stopOpacity="0" /></linearGradient></defs>
+    {[100, 200, 300].map(y => <line key={y} x1="0" x2="1200" y1={y} y2={y} />)}
+    <path className="area" d="M0 330 L120 300 L220 312 L330 250 L430 270 L540 200 L650 222 L760 160 L860 180 L980 110 L1080 128 L1200 60 L1200 400 L0 400Z" />
+    <path className="line" d="M0 330 L120 300 L220 312 L330 250 L430 270 L540 200 L650 222 L760 160 L860 180 L980 110 L1080 128 L1200 60" />
+  </svg>
+}
+
+function Portrait({ children }) {
+  const [ref, inView] = useInView()
+  const move = e => {
+    if (matchMedia('(hover: none)').matches) return
+    const r = ref.current.getBoundingClientRect()
+    const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5
+    ref.current.style.transform = `perspective(900px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`
+  }
+  const leave = () => { ref.current.style.transform = '' }
+  return <figure ref={ref} onMouseMove={move} onMouseLeave={leave} className={`portrait reveal ${inView ? 'in' : ''}`}>{children}</figure>
+}
+
+function Marquee() {
+  const items = ['Ernst & Young', 'Project Destined', 'FinBud AI', 'BIDV Bank', 'Beta Gamma Sigma', 'University of Illinois Chicago', 'Bloomberg Certified']
+  return <div className="marquee" aria-hidden="true"><div className="track">
+    {[...items, ...items].map((t, i) => <span key={i}>{t}</span>)}
+  </div></div>
+}
+
+function Timeline({ children }) {
+  const ref = useRef(null)
+  useEffect(() => {
+    const on = () => {
+      const r = ref.current.getBoundingClientRect()
+      const p = Math.min(Math.max((innerHeight * .6 - r.top) / r.height, 0), 1)
+      ref.current.style.setProperty('--p', p * 100 + '%')
+    }
+    addEventListener('scroll', on, { passive: true }); on()
+    return () => removeEventListener('scroll', on)
+  }, [])
+  return <div className="timeline" ref={ref}><span className="fill" />{children}</div>
+}
+
 function Hero() {
   const [ref, inView] = useInView()
   return <header className="hero wrap" id="top">
-    <Reveal className="kicker"><span className="dot" />{profile.kicker}</Reveal>
-    <Reveal as="h1">Turning numbers into <em>decisions</em>.</Reveal>
-    <Reveal as="p" className="lead">{profile.lead}</Reveal>
-    <Reveal className="cta">
-      <a className="btn solid" href={`mailto:${profile.email}`}>Get in touch →</a>
-      <a className="btn line" href="#experience">View experience</a>
-    </Reveal>
+    <HeroChart />
+    <div className="hero-grid">
+      <div>
+        <Reveal className="kicker"><span className="dot" />{profile.kicker}</Reveal>
+        <SplitTitle />
+        <Reveal as="p" className="lead">{profile.lead}</Reveal>
+        <Reveal className="cta">
+          <a className="btn solid" href={`mailto:${profile.email}`}>Get in touch →</a>
+          <a className="btn line" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+        </Reveal>
+      </div>
+      <Portrait>
+        <img src={import.meta.env.BASE_URL + profile.photo} alt={`Portrait of ${profile.fullName}`} width="400" height="400" />
+        <figcaption>
+          <b>{profile.fullName}</b>
+          <span>{profile.headline}</span>
+          <span className="badge"><span className="dot" />{profile.seeking}</span>
+        </figcaption>
+      </Portrait>
+    </div>
     <div ref={ref} className={`stats reveal ${inView ? 'in' : ''}`}>
       {stats.map(s => <div className="stat" key={s.tag}>
         <span className="mono">{s.tag}</span>
@@ -88,6 +154,7 @@ function Hero() {
         <span>{s.label}</span>
       </div>)}
     </div>
+    <Marquee />
   </header>
 }
 
@@ -127,12 +194,12 @@ export default function App() {
 
     <section id="experience" style={{ background: 'var(--paper-2)' }}><div className="wrap">
       <SecHead n="02" label="EXPERIENCE" title="Where I've done the work." />
-      {experience.map(r => <Role key={r.company} r={r} />)}
+      <Timeline>{experience.map(r => <Role key={r.company} r={r} />)}</Timeline>
     </div></section>
 
     <section id="leadership"><div className="wrap">
       <SecHead n="03" label="LEADERSHIP" title="Beyond the internship." />
-      {leadership.map(r => <Role key={r.company} r={r} />)}
+      <Timeline>{leadership.map(r => <Role key={r.company} r={r} />)}</Timeline>
     </div></section>
 
     <section id="skills" style={{ paddingTop: 0 }}><div className="wrap">
@@ -154,6 +221,7 @@ export default function App() {
         <a className="btn line" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
     </Reveal>
+    <Chat />
     <footer className="wrap"><span>© 2026 {profile.name}</span><span>{profile.location}</span></footer>
   </>
 }
